@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import tester from './tester.docx';
 import './App.css';
 
 var JSZip = require('jszip');
@@ -17,7 +17,7 @@ class App extends Component {
     console.log('lo', url)
           window.JSZipUtils.getBinaryContent(url,callback);
       }
-      loadFile("tester.docx",function(error,content){
+      loadFile(tester,function(error,content){
           if (error) { throw error };
           var zip = new JSZip(content);
           var doc=new Docxtemplater().loadZip(zip)
@@ -53,7 +53,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
