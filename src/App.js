@@ -1,18 +1,21 @@
-import React from 'react';
-import { render } from 'react-dom';
-import tester from './tester.docx';
+import React from 'react'
+import JSZip from 'jszip'
+import Docxtemplater from 'docxtemplater'
 
-var JSZip = require('jszip');
-var Docxtemplater = require('docxtemplater');
+import tester from './tester.docx'
+
 
 class App extends React.Component {
-
+  state = {
+      test:''
+  };
+  loadFile(url, callback) {
+        console.log('lo', url)
+        window.JSZipUtils.getBinaryContent(url, callback);
+      }
   render() {
-    function loadFile(url, callback) {
-      console.log('lo', url)
-      window.JSZipUtils.getBinaryContent(url, callback);
-    }
-    loadFile(tester, function (error, content) {
+    this.loadFile(tester, function (error, content) {
+      console.log('run!')
       if (error) { throw error };
       var zip = new JSZip(content);
       var doc = new Docxtemplater().loadZip(zip)
@@ -45,6 +48,7 @@ class App extends React.Component {
       }) //Output the document using Data-URI
       window.saveAs(out, "output.docx")
     })
+
     return (
       <div>
       This is a test
