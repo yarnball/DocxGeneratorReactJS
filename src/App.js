@@ -1,5 +1,4 @@
 import React from 'react'
-import JSZip from 'jszip'
 import Docxtemplater from 'docxtemplater'
 
 import tester from './tester.docx'
@@ -12,15 +11,16 @@ class App extends React.Component {
   loadFile(url, callback) {
         console.log('lo', url)
         window.JSZipUtils.getBinaryContent(url, callback);
-      }
+  }
+
   render() {
     this.loadFile(tester, function (error, content) {
-      console.log('run!')
+      console.log('run!', tester)
       if (error) { throw error };
-      var zip = new JSZip(content);
+      var zip = new window.JSZip(content);
       var doc = new Docxtemplater().loadZip(zip)
       doc.setData({
-        first_name: 'John',
+        first_name: 'Arash',
         last_name: 'Doe',
         phone: '0652455478',
         description: 'New Website'
